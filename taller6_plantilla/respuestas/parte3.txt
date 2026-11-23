@@ -1,0 +1,33 @@
+TALLER 6 - RESPUESTAS PARTE 3
+Integrante A: ___________________________
+Integrante B: ___________________________
+
+──────────────────────────────────────────
+1. ¿Qué contiene productos[0] antes de ejecutar new Producto(...)?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+2. ¿Qué diferencia hay entre productos[i].precio y productos[i].valorTotal()?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+3. Cuando haces masEconomico = productos[i], ¿se copian los datos del objeto
+   o solo la referencia? ¿Qué implica eso?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+4. Después del descuento, ¿el valorTotalInventario impreso refleja el nuevo
+   precio? ¿Por qué?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+MODIFICACIÓN REALIZADA (producto agregado y producto con mayor stock afectado):
+

@@ -1,0 +1,17 @@
+# Compilados Java
+*.class
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+*.project
+*.classpath
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini

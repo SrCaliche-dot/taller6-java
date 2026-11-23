@@ -1,0 +1,41 @@
+TALLER 6 - RESPUESTAS PARTE 4
+Integrante A: ___________________________
+Integrante B: ___________________________
+
+──────────────────────────────────────────
+1. ¿Cuál es la diferencia entre add("valor") y add(1, "valor")?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+2. ¿Qué ocurre si intentas hacer ciudades.get(10) en una lista de 5 elementos?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+3. ¿Por qué usamos ArrayList<Integer> y no ArrayList<int>?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+4. ¿Cuál es el orden de atención en una cola FIFO?
+   ¿Cuál sería el orden en una pila LIFO con addFirst/removeFirst?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+5. ¿Cuándo preferirías usar LinkedList sobre ArrayList y viceversa?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+MODIFICACIONES REALIZADAS:
+Sección B (filtro >= 40 + suma):
+
+Sección C (clientes 5 y 6 en cola):
+

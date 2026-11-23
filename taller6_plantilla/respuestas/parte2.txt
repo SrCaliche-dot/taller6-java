@@ -1,0 +1,31 @@
+TALLER 6 - RESPUESTAS PARTE 2
+Integrante A: ___________________________
+Integrante B: ___________________________
+
+──────────────────────────────────────────
+1. ¿Cómo accedes al valor 88 (Luis en Español) usando índices?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+2. ¿Cuántos bucles for necesitas para recorrer todos los elementos de un arreglo 2D? ¿Por qué?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+3. Si agregas un cuarto estudiante, ¿qué línea de código tendrías que cambiar?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+4. ¿Qué significa String.format("%-12d", valor)? ¿Qué cambia si quitas el -?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+MODIFICACIÓN REALIZADA (describe qué cambiaste y el nuevo promedio de columna):
+

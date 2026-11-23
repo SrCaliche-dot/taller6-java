@@ -1,0 +1,183 @@
+name: Verificar Entrega Taller6
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    name: Verificar estructura de entrega
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Detectar rama
+        run: |
+          if [ -n "$GITHUB_HEAD_REF" ]; then
+            echo "RAMA=$GITHUB_HEAD_REF" >> $GITHUB_ENV
+          else
+            echo "RAMA=$GITHUB_REF_NAME" >> $GITHUB_ENV
+          fi
+
+      - name: Compilar todos los archivos
+        id: compilar
+        run: |
+          ERRORES=""
+          for archivo in src/Parte1.java src/Parte2.java src/Producto.java src/Parte3.java src/Parte4.java; do
+            if [ -f "$archivo" ]; then
+              if ! javac "$archivo" -d src 2>/tmp/err_$$.txt; then
+                ERRORES="$ERRORES\n❌ Error en $archivo:\n$(cat /tmp/err_$$.txt)"
+              else
+                echo "✅ $archivo compiló OK"
+              fi
+            else
+              ERRORES="$ERRORES\n❌ Falta: $archivo"
+            fi
+          done
+          # Compilar Parte3 junto con Producto (depende de él)
+          if [ -f "src/Producto.java" ] && [ -f "src/Parte3.java" ]; then
+            javac src/Producto.java src/Parte3.java -d src 2>/dev/null || true
+          fi
+          echo "ERRORES_COMPILACION<<EOF" >> $GITHUB_ENV
+          echo -e "$ERRORES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Verificar respuestas
+        id: respuestas
+        run: |
+          FALTANTES=""
+          for parte in 1 2 3 4; do
+            archivo="respuestas/parte${parte}.txt"
+            if [ ! -f "$archivo" ]; then
+              FALTANTES="$FALTANTES\n❌ Falta: $archivo"
+            else
+              # Verificar que no estén vacías las respuestas (buscar "RESPUESTA:" seguido de texto)
+              VACIAS=$(grep -c "^RESPUESTA:$" "$archivo" 2>/dev/null || echo 0)
+              if [ "$VACIAS" -gt 2 ]; then
+                FALTANTES="$FALTANTES\n⚠️  $archivo tiene $VACIAS respuestas vacías"
+              else
+                echo "✅ $archivo tiene respuestas"
+              fi
+            fi
+          done
+          echo "FALTANTES_RESP<<EOF" >> $GITHUB_ENV
+          echo -e "$FALTANTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Verificar imágenes
+        id: imagenes
+        run: |
+          ESPERADAS="p1_resultado p2_resultado p3_resultado p4a_ciudades p4b_numeros p4c_cola"
+          ENCONTRADAS=0
+          DETALLE=""
+          for img in $ESPERADAS; do
+            ENCONTRADO=false
+            for ext in png jpg jpeg PNG JPG; do
+              if [ -f "imagenes/${img}.${ext}" ]; then
+                TAM=$(stat -c%s "imagenes/${img}.${ext}" 2>/dev/null || echo 0)
+                if [ "$TAM" -gt 10000 ]; then
+                  DETALLE="$DETALLE\n✅ ${img}.${ext} ($(( TAM/1024 )) KB)"
+                  ENCONTRADAS=$(( ENCONTRADAS + 1 ))
+                else
+                  DETALLE="$DETALLE\n⚠️  ${img}.${ext} muy pequeña ($TAM bytes)"
+                fi
+                ENCONTRADO=true
+                break
+              fi
+            done
+            if [ "$ENCONTRADO" = false ]; then
+              DETALLE="$DETALLE\n❌ Falta: imagenes/${img}.(png|jpg)"
+            fi
+          done
+          echo "IMAGENES_ENCONTRADAS=$ENCONTRADAS" >> $GITHUB_ENV
+          echo "DETALLE_IMAGENES<<EOF" >> $GITHUB_ENV
+          echo -e "$DETALLE" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Verificar autores en Git
+        id: autores
+        run: |
+          AUTORES=$(git log --format="%ae" | sort -u | wc -l)
+          COMMITS=$(git log --oneline | wc -l)
+          LISTA_AUTORES=$(git log --format="%an <%ae>" | sort -u)
+          echo "AUTORES_COUNT=$AUTORES" >> $GITHUB_ENV
+          echo "COMMITS_COUNT=$COMMITS" >> $GITHUB_ENV
+          echo "LISTA_AUTORES<<EOF" >> $GITHUB_ENV
+          echo "$LISTA_AUTORES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Verificar nombre de rama
+        run: |
+          if echo "$RAMA" | grep -qE '^taller6-[a-z]+-[a-z]+$'; then
+            echo "RAMA_OK=true" >> $GITHUB_ENV
+            echo "✅ Rama con formato correcto: $RAMA"
+          else
+            echo "RAMA_OK=false" >> $GITHUB_ENV
+            echo "⚠️  Rama no sigue el formato taller6-apellidoA-apellidoB: $RAMA"
+          fi
+
+      - name: Escribir Job Summary
+        run: |
+          echo "## 📋 Verificación Taller 6 — Arreglos y Colecciones" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Rama:** \`$RAMA\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### 🔨 Compilación" >> $GITHUB_STEP_SUMMARY
+          if [ -z "$ERRORES_COMPILACION" ]; then
+            echo "✅ Todos los archivos compilan correctamente." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "$ERRORES_COMPILACION" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📝 Respuestas" >> $GITHUB_STEP_SUMMARY
+          if [ -z "$FALTANTES_RESP" ]; then
+            echo "✅ Todos los archivos de respuestas presentes." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "$FALTANTES_RESP" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📸 Imágenes ($IMAGENES_ENCONTRADAS / 6)" >> $GITHUB_STEP_SUMMARY
+          echo "$DETALLE_IMAGENES" >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 👥 Git" >> $GITHUB_STEP_SUMMARY
+          echo "- Commits: **$COMMITS_COUNT**" >> $GITHUB_STEP_SUMMARY
+          echo "- Autores distintos: **$AUTORES_COUNT**" >> $GITHUB_STEP_SUMMARY
+          echo "- Rama OK: **$RAMA_OK**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Autores detectados:**" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$LISTA_AUTORES" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> Esta verificación confirma la estructura. La nota final la asigna el profesor." >> $GITHUB_STEP_SUMMARY
+
+      - name: Fallar si hay problemas críticos
+        run: |
+          FALLO=false
+          [ -n "$ERRORES_COMPILACION" ] && FALLO=true && echo "❌ Errores de compilación"
+          [ "$AUTORES_COUNT" -lt 2 ]   && FALLO=true && echo "❌ Se requieren 2 autores distintos"
+          [ "$COMMITS_COUNT" -lt 4 ]   && FALLO=true && echo "❌ Se requieren al menos 4 commits"
+          [ "$IMAGENES_ENCONTRADAS" -lt 4 ] && FALLO=true && echo "❌ Se requieren al menos 4 imágenes"
+          if [ "$FALLO" = true ]; then exit 1; fi
+          echo "✅ Verificación superada"

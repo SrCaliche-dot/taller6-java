@@ -1,0 +1,32 @@
+TALLER 6 - RESPUESTAS PARTE 1
+Integrante A: ___________________________
+Integrante B: ___________________________
+Fecha: __________________________________
+
+──────────────────────────────────────────
+1. ¿Qué índice tiene el último elemento de un arreglo de tamaño 5?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+2. ¿Qué pasa si intentas acceder a notas[5] en este arreglo? ¿Qué error esperas?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+3. ¿Por qué se inicializa maximo = notas[0] en vez de maximo = 0?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+4. ¿Qué significa (double) antes de suma? ¿Qué pasaría si lo quitas?
+
+RESPUESTA:
+
+
+──────────────────────────────────────────
+MODIFICACIÓN REALIZADA (describe qué cambiaste y cuál fue el resultado):
+
