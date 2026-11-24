@@ -1,15 +1,22 @@
-/**
- * Taller 6 - Parte 3: Clase Producto para arreglo de objetos
- * Integrante A: ___________________________
- * Integrante B: ___________________________
- *
- * INSTRUCCIONES:
- * Copia aquí la clase Producto completa que aparece en el documento del taller.
- * Este archivo debe compilarse JUNTO con Parte3.java:
- *   javac src/Producto.java src/Parte3.java
- */
 public class Producto {
 
-    // TODO: Pegar la clase Producto aquí (atributos, constructor, métodos)
+    String nombre;
+    double precio;
+    int stock;
 
+    public Producto(String nombre, double precio, int stock) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
+    public double valorTotal() {
+        return precio * stock;
+    }
+
+    public String toString() {
+        return String.format(
+            "%-12s  $%7.2f   stock: %3d   valor: $%8.2f",
+            nombre, precio, stock, valorTotal());
+    }
 }

@@ -1,33 +1,26 @@
 TALLER 6 - RESPUESTAS PARTE 3
-Integrante A: ___________________________
-Integrante B: ___________________________
+Integrante A: Isaaid Caicedo
+Integrante B: Christopher Coronel
+Fecha: 23/11/2026
 
 ──────────────────────────────────────────
 1. ¿Qué contiene productos[0] antes de ejecutar new Producto(...)?
 
-RESPUESTA:
+Contiene null, porque todavía no se ha creado ningún objeto en esa posición.
 
-
-──────────────────────────────────────────
 2. ¿Qué diferencia hay entre productos[i].precio y productos[i].valorTotal()?
 
-RESPUESTA:
+El primero devuelve el precio individual del producto, mientras que el segundo calcula el precio multiplicado por la cantidad disponible.
 
+3. Cuando haces masEconomico = productos[i], ¿se copian los datos del objeto o solo la referencia? ¿Qué implica eso?
 
-──────────────────────────────────────────
-3. Cuando haces masEconomico = productos[i], ¿se copian los datos del objeto
-   o solo la referencia? ¿Qué implica eso?
+Solo se copia la referencia. Esto significa que ambas variables apuntan al mismo objeto y cualquier modificación afecta al mismo producto.
 
-RESPUESTA:
+4. Después del descuento, ¿el valorTotalInventario impreso refleja el nuevo precio? ¿Por qué?
 
-
-──────────────────────────────────────────
-4. Después del descuento, ¿el valorTotalInventario impreso refleja el nuevo
-   precio? ¿Por qué?
-
-RESPUESTA:
-
+No, porque el valor total del inventario se calculó antes de aplicar el descuento.
 
 ──────────────────────────────────────────
 MODIFICACIÓN REALIZADA (producto agregado y producto con mayor stock afectado):
+Agregamos los audífonos con un precio de $75.00 y un stock de 30 unidades. Cambiamos el descuento al 15% y lo aplicamos al producto con mayor stock. El precio de los audífonos bajó a $63.75 y su valor total quedó en $1,912.50.
 
