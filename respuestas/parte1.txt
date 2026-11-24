@@ -1,32 +1,29 @@
 TALLER 6 - RESPUESTAS PARTE 1
-Integrante A: ___________________________
-Integrante B: ___________________________
-Fecha: __________________________________
+Integrante A: Isaaid Caicedo
+Integrante B: Christopher Coronel
+Fecha: 23/11/2026
 
 ──────────────────────────────────────────
 1. ¿Qué índice tiene el último elemento de un arreglo de tamaño 5?
 
-RESPUESTA:
+El índice 4, porque los arreglos comienzan desde 0.
 
+2. ¿Qué pasa si intentas acceder a notas[5]?
 
-──────────────────────────────────────────
-2. ¿Qué pasa si intentas acceder a notas[5] en este arreglo? ¿Qué error esperas?
+Se produce un error ArrayIndexOutOfBoundsException, porque esa posición no existe en el arreglo de 5 elementos.
 
-RESPUESTA:
-
-
-──────────────────────────────────────────
 3. ¿Por qué se inicializa maximo = notas[0] en vez de maximo = 0?
 
-RESPUESTA:
+Porque así comenzamos la comparación con un valor real del arreglo y evitamos resultados incorrectos si todos los números son negativos.
 
-
-──────────────────────────────────────────
 4. ¿Qué significa (double) antes de suma? ¿Qué pasaría si lo quitas?
 
-RESPUESTA:
+Convierte la suma a un valor decimal para calcular correctamente el promedio. Si lo quitamos, la división sería entera y perderíamos los decimales.
 
-
-──────────────────────────────────────────
 MODIFICACIÓN REALIZADA (describe qué cambiaste y cuál fue el resultado):
+Cambiamos el tamaño del arreglo de 5 a 8 notas.
+Al ejecutar el programa obtuvimos una suma de 578,
+un promedio de 72.25, una nota máxima de 91 y una
+mínima de 44. El programa funcionó correctamente
+sin necesidad de modificar los ciclos for.
 
