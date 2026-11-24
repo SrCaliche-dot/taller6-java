@@ -1,41 +1,30 @@
 TALLER 6 - RESPUESTAS PARTE 4
-Integrante A: ___________________________
-Integrante B: ___________________________
+Integrante A: Isaaid Caicedo
+Integrante B: Christopher Coronel
+Fecha: 23/11/2026
 
-──────────────────────────────────────────
 1. ¿Cuál es la diferencia entre add("valor") y add(1, "valor")?
 
-RESPUESTA:
+El primero agrega un elemento al final de la lista, mientras que el segundo lo inserta en el índice 1 y desplaza los demás elementos.
 
-
-──────────────────────────────────────────
 2. ¿Qué ocurre si intentas hacer ciudades.get(10) en una lista de 5 elementos?
 
-RESPUESTA:
+Se produce una excepción IndexOutOfBoundsException porque el índice solicitado no existe.
 
-
-──────────────────────────────────────────
 3. ¿Por qué usamos ArrayList<Integer> y no ArrayList<int>?
 
-RESPUESTA:
+Porque las colecciones de Java trabajan con tipos de referencia. Integer es la clase envolvente del tipo primitivo int.
 
+4. ¿Cuál es el orden de atención en una cola (FIFO)? ¿Cuál sería el orden en una pila (LIFO) con addFirst/removeFirst?
 
-──────────────────────────────────────────
-4. ¿Cuál es el orden de atención en una cola FIFO?
-   ¿Cuál sería el orden en una pila LIFO con addFirst/removeFirst?
+En FIFO, el primero en entrar es el primero en salir. En LIFO, el último en entrar es el primero en salir.
 
-RESPUESTA:
-
-
-──────────────────────────────────────────
 5. ¿Cuándo preferirías usar LinkedList sobre ArrayList y viceversa?
 
-RESPUESTA:
+Usaría LinkedList cuando necesito agregar o eliminar elementos frecuentemente en los extremos y ArrayList cuando necesito acceder rápidamente a los elementos mediante índices.
 
-
-──────────────────────────────────────────
 MODIFICACIONES REALIZADAS:
-Sección B (filtro >= 40 + suma):
 
-Sección C (clientes 5 y 6 en cola):
+En la sección B cambiamos el filtro de números de 50 a 40 y agregamos la suma de los elementos filtrados, obteniendo un total de 335.
 
+En la sección C agregamos al Cliente 5 y al Cliente 6 mientras se atendía la cola. Mostramos la cola actualizada antes de continuar con la atención, respetando el orden de llegada de los clientes.
