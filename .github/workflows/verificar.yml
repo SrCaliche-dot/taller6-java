@@ -41,7 +41,7 @@ jobs:
           ERRORES=""
           for archivo in src/Parte1.java src/Parte2.java src/Producto.java src/Parte3.java src/Parte4.java; do
             if [ -f "$archivo" ]; then
-              if ! javac "$archivo" -d src 2>/tmp/err_$$.txt; then
+              if ! javac -cp src "$archivo" -d src 2>/tmp/err_$$.txt; then
                 ERRORES="$ERRORES\n❌ Error en $archivo:\n$(cat /tmp/err_$$.txt)"
               else
                 echo "✅ $archivo compiló OK"
