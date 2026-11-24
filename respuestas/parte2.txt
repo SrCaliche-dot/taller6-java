@@ -1,31 +1,24 @@
 TALLER 6 - RESPUESTAS PARTE 2
-Integrante A: ___________________________
-Integrante B: ___________________________
+Integrante A: Isaaid Caicedo
+Integrante B: Christopher Coronel
+Fecha: 23/11/2026
 
-──────────────────────────────────────────
 1. ¿Cómo accedes al valor 88 (Luis en Español) usando índices?
 
-RESPUESTA:
+Utilizando calificaciones[1][1], porque Luis está en la segunda fila y Español en la segunda columna.
 
-
-──────────────────────────────────────────
 2. ¿Cuántos bucles for necesitas para recorrer todos los elementos de un arreglo 2D? ¿Por qué?
 
-RESPUESTA:
+Dos ciclos for. Uno recorre las filas y el otro recorre las columnas de cada fila.
 
-
-──────────────────────────────────────────
 3. Si agregas un cuarto estudiante, ¿qué línea de código tendrías que cambiar?
 
-RESPUESTA:
+Cambiar int filas = 3; por int filas = 4;. También debemos agregar el nombre del estudiante y sus calificaciones.
 
+4. ¿Qué significa String.format("%-12d", valor)? ¿Qué cambia si quitas el "-"?
 
-──────────────────────────────────────────
-4. ¿Qué significa String.format("%-12d", valor)? ¿Qué cambia si quitas el -?
+Permite mostrar un número entero alineado a la izquierda en un espacio mínimo de 12 caracteres. Si quitamos el signo negativo, se alinea a la derecha.
 
-RESPUESTA:
-
-
-──────────────────────────────────────────
 MODIFICACIÓN REALIZADA (describe qué cambiaste y el nuevo promedio de columna):
 
+Agregamos un cuarto estudiante llamado Pedro con las notas 78, 65 y 92. Aumentamos el número de filas de 3 a 4 y obtuvimos un promedio de 78.33 para Pedro. Los promedios de cada materia se actualizaron automáticamente.
